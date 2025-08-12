@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>シンプルGoogle検索ブラウザ風</title>
+<style>
+  /* ワンUIっぽいシンプル＆クリーンなデザイン */
+  body {
+    margin: 0; padding: 0;
+    background: #fafafa;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+    height: 100vh;
+    align-items: center;
+    justify-content: center;
+  }
+  .search-container {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgb(0 0 0 / 0.1);
+    padding: 16px 24px;
+    width: 90%;
+    max-width: 600px;
+  }
+  h1 {
+    margin: 0 0 16px;
+    font-weight: 600;
+    color: #222;
+    text-align: center;
+  }
+  form {
+    display: flex;
+    gap: 8px;
+  }
+  input[type="search"] {
+    flex: 1;
+    padding: 12px 16px;
+    border: 1.5px solid #ccc;
+    border-radius: 24px;
+    font-size: 1.1rem;
+    transition: border-color 0.2s;
+  }
+  input[type="search"]:focus {
+    border-color: #1a73e8;
+    outline: none;
+  }
+  button {
+    background: #1a73e8;
+    border: none;
+    color: white;
+    padding: 0 20px;
+    border-radius: 24px;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 1.1rem;
+    transition: background-color 0.2s;
+  }
+  button:hover {
+    background: #155ab6;
+  }
+</style>
+</head>
+<body>
+  <div class="search-container" role="main" aria-label="Google検索風ブラウザ">
+    <h1>Google検索ブラウザ</h1>
+    <form id="searchForm" action="" method="GET" target="_blank" rel="noopener">
+      <input type="search" name="q" id="searchInput" placeholder="キーワードを入力" aria-label="検索キーワード" required />
+      <button type="submit">検索</button>
+    </form>
+  </div>
+
+  <script>
+    const form = document.getElementById("searchForm");
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const query = document.getElementById("searchInput").value.trim();
+      if (query.length === 0) return;
+      // Google検索URLにリダイレクト（新規タブ）
+      const url = `https://www.google.com/search?q=${encodeURIComponent(query)}`;
+      window.open(url, "_blank", "noopener");
+    });
+  </script>
+</body>
+</html>
